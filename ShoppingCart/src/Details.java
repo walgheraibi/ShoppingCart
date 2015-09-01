@@ -35,9 +35,7 @@ public class Details extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		String isuppdateing = ""+request.getParameter("toUpdate");
-		if(!isuppdateing.equals("Update"))
-		{
+		
 			try
 		
 		{
@@ -54,8 +52,6 @@ public class Details extends HttpServlet {
 		message= " <div class=\"container\">";
 		for(Books temp:list)
 		{	
-			System.out.println("In look: " +temp);
-			System.out.println("In look: " +temp.getAuthor());
 			book= temp;
 			message+="<h4>"+
 	                  temp.getTitle()+"</h4> <p>"+
@@ -63,15 +59,10 @@ public class Details extends HttpServlet {
                       temp.getAuthor()+"</p>  <p><b>Price: $</b>"+
                       temp.getPrice()+"</p> <p> <b>Description: </b>"+
                       temp.getDescription()+"</p> "+
-                     " <img src=\""+ temp.getImage()+"\" class=\"img-responsive\" alt=\"Cinque Terre\">"
-      +            // "<a class=\"btn btn-primary\" onclick=\"<%Details.Update(request, response);%>\"> Add to Cart </a>";     
+                     " <img src=\""+ temp.getImage()+"\" class=\"img-responsive\" alt=\"Cinque Terre\">"+
+                     "<a class=\"btn btn-primary\" href=\"addTocart?bookid="+temp.getId()+"\"> Add to Cart </a>"; 
 			
-"<input type='button' class=\"btn btn-primary\" name=\"toUpdate\" value=\"Add to Cart\" onclick=\"location.href='/ShoppingCart/Details';\">"; 
-
-		}
-		// +
-		//booklist.add(temp);
-		
+		}	
 	message+="</div>";
 	request.setAttribute("ProductList", message);
 
@@ -81,18 +72,18 @@ public class Details extends HttpServlet {
 		catch(Exception e)
 		{
 			System.out.println(""+e.getStackTrace());
-			System.out.println("XXXXXXXx");
+
 		}
-		}
-		else
+		
+		/*else
 		{
 			ArrayList<Books> booklist = new ArrayList<Books>();
 			booklist.add(book);
 			System.out.print("it is update");
 			System.out.print(booklist);
-		}
+		}*/
 	}
-
+/*
 	protected void Update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Books> booklist = new ArrayList<Books>();
 		booklist.add(book);
@@ -101,7 +92,7 @@ public class Details extends HttpServlet {
 		
 		
 	}
-
+*/
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

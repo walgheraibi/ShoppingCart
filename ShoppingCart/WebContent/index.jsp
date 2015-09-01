@@ -16,7 +16,6 @@
 <body>
 <jsp:include page="NavBar.jsp"/>
 
-
 ${ProductList}
 </body>
 </html>

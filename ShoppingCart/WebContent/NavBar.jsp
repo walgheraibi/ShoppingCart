@@ -29,7 +29,7 @@
 					<li><a href="Products">Book list</a></li>		
 				</ul>
 				<ul class="nav navbar-nav navbar-right">					
-					<li>  <a class="glyphicon glyphicon-shopping-cart" href="ShoppingCart">  Cart</a></li>
+					<li>  <a class="glyphicon glyphicon-shopping-cart" href="Cart">  Cart</a></li>
 		
 				</ul>
 			</div>

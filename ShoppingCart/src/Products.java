@@ -62,6 +62,7 @@ public class Products extends HttpServlet {
                       temp.getDescription()+"</p> "+
                      " <img src=\""+ temp.getImage()+"\" class=\"img-responsive\" alt=\"Cinque Terre\" height=\"550\" width=\"250\">"+
                       "<a class=\"btn btn-primary\" href=\"Details?bookid="+temp.getId()+"\"> Detail </a>"+
+                      "<a class=\"btn btn-primary\" href=\"addTocart?bookid="+temp.getId()+"\"> Add to Cart </a>"+
                       "</div></div></div>";          
 
 		}
@@ -72,7 +73,9 @@ public class Products extends HttpServlet {
 		}
 		catch(Exception e)
 		{
-			System.out.println(""+e);
+			System.out.println(""+e.toString());
+			System.out.println(""+e.getCause());
+			System.out.println(""+e.getStackTrace());
 		}
 	}
 
