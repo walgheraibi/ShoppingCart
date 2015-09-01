@@ -42,7 +42,7 @@ public class addTocart extends HttpServlet {
 		int book_id = Integer.parseInt(request.getParameter("bookid"));
 		List<Books> shoopingCart;
 		if (session.getAttribute("shoopingCart") == null) {
-			shoopingCart = new ArrayList();
+			shoopingCart = new ArrayList<Books>();
 		} else {
 			shoopingCart = (List<Books>) session.getAttribute("shoopingCart");
 		}
@@ -53,8 +53,22 @@ public class addTocart extends HttpServlet {
 
 		try {
 			book = list.get(0);
-			shoopingCart.add(book);
-			String alert = "Added to cart!";
+			String alert="";
+			System.out.println(shoopingCart.indexOf(book));
+			for(Books bo: shoopingCart){
+				if(bo.getId() == book.getId())
+				{
+					alert = "it contains it!";
+					break;
+				}
+			}
+		
+			if(!alert.equals("it contains it!"))
+			{
+				shoopingCart.add(book);
+				 alert = "Added to cart!";
+			}
+			
 			request.setAttribute("ProductList", alert);
 			session.setAttribute("shoopingCart", shoopingCart);
 				getServletContext().getRequestDispatcher("/index.jsp").forward(

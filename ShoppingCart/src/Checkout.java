@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import model.Books;
 
 /**
- * Servlet implementation class Cart
+ * Servlet implementation class Checkout
  */
-@WebServlet("/Cart")
-public class Cart extends HttpServlet {
+@WebServlet("/Checkout")
+public class Checkout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Cart() {
+    public Checkout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,32 +32,27 @@ public class Cart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		//String productid = request.getParameter("productid");
-		List<Books> shoopingCart = null;
-		String alert;
+		List<Books>shoopingCart=(List<Books>) session.getAttribute("shoopingCart");
 		String bookList="<div class=\"container\">";
-		if(session.getAttribute("shoopingCart")==null){
-			alert="cart is empty!";
-			// Set response content type
-			response.setContentType("text/html");
-
-			request.setAttribute("ProductList", alert);
-			
-			getServletContext().getRequestDispatcher("/index.jsp")
-					.include(request, response);
-			alert = "";
-		}else{
-			shoopingCart=(List<Books>) session.getAttribute("shoopingCart");
-
+		double sum =0, tax=0, total=0;
+	
 		for(Books book: shoopingCart)
         {
-			bookList+="<li class=\"list-group-item\"><img src=\""+book.getImage()
-            		+"\" style=\"width:120px;height:120px\"> <a href=\"Details?bookid="
-            		+book.getId()+"\">"+book.getTitle()+"</a><br> <b>Author: "+book.getAuthor()+"</b> "
-            		+"<b>Price: $"+book.getPrice()+"</b><br>"
+			bookList+="<li class=\"list-group-item\"><a href=\"Details?bookid="
+            		+book.getId()+"\">"+book.getTitle()+"</a><br> <b>Author: "+book.getAuthor()+"</b> <br> "
+            		+"<b>Price: $"+book.getPrice()+"</b></br>"
             		+"</li>";
+			sum+=book.getPrice().doubleValue();
         }
-		bookList+="<a class=\"btn btn-primary\" href=\"Checkout\"> Checkout </a>";
+		
+		tax=Math.floor(sum*.19);
+		System.out.println(tax );
+		
+		total= tax+sum;
+		bookList+="<li class=\"list-group-item\"><br> <b>Sub Total: $"+sum+"</b><br> "
+            		+"<b>Tax: $"+tax+"</b><br>"
+            		+"<b>Total: $"+total+"</b><br>"
+            		+"</li>";
 				
 		bookList+="</div>";
 		// Set response content type
@@ -69,9 +63,6 @@ public class Cart extends HttpServlet {
 				getServletContext().getRequestDispatcher("/index.jsp")
 						.forward(request, response);
 				bookList = "";
-		}
-				
-		
 	}
 
 	/**
