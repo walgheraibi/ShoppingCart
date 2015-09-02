@@ -43,6 +43,7 @@ public class addTocart extends HttpServlet {
 		List<Books> shoopingCart;
 		if (session.getAttribute("shoopingCart") == null) {
 			shoopingCart = new ArrayList<Books>();
+			
 		} else {
 			shoopingCart = (List<Books>) session.getAttribute("shoopingCart");
 		}

@@ -30,7 +30,11 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">					
 					<li>  <a class="glyphicon glyphicon-shopping-cart" href="Cart">  Cart</a></li>
-		
+					<li><a href="SignUp.jsp"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+
+					<li><a href="SignIn"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</ul>
 			</div>
 		</div>
